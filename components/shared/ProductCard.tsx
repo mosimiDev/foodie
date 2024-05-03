@@ -1,67 +1,113 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Image, Pressable, FlatList } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
 
 import { useNavigation } from '@react-navigation/native';
-import ProductDetails from '../../screens/ProductDetailScreen';
+import { ProductItems } from './ProductItems';
 
 
-export default function ProductCard({ productName, productPrice, image }) {
+
+
+
+
+export default function ProductCard({ ProductItems }) {
 
   const navigation = useNavigation();
 
-  const onPressHandler = () => {
-    navigation.navigate("ProductDetails" as never,)
-  };
 
 
   return (
+    <View>
 
-    <Pressable
-      style={({ pressed }) => [
+      <Pressable onPress={() => navigation.navigate('ProductDetails', ProductItems)} style={({ pressed }) => [
         {
           backgroundColor: pressed ? '#ECECEC' : 'white',
         },
         styles.wrapperCustom,
-      ]}
-      onPress={onPressHandler}
-    >
-
-      {/* Icon plus Product Image Section */}
-      <View style={styles.sectionImage}>
-        <View style={styles.heartIcon}>
-          <Feather name="heart" size={16} color="black" />
+      ]}>
+        {/* Icon plus Product Image Section */}
+        <View style={styles.sectionImage}>
+          <View style={styles.heartIcon}>
+            <Feather name="heart" size={16} color="black" />
+          </View>
+          <Image
+            style={styles.image}
+            source={ProductItems.image}
+          />
         </View>
-        <Image
-          style={styles.image}
-          source={image}
-        />
-      </View>
-      {/*End of Icon plus Product Image Section */}
-      {/* Text Section */}
-      <View style={styles.sectionText}>
-        <Text>{productName}</Text>
-        <Text style={styles.priceText}>{productPrice}</Text>
-      </View>
-      {/*End of Text Section */}
+        {/*End of Icon plus Product Image Section */}
+        {/* Text Section */}
+        <View style={styles.sectionText}>
+          <Text>{ProductItems.productName}</Text>
+          <Text style={styles.priceText}>{ProductItems.productPrice}</Text>
+        </View>
+        {/*End of Text Section */}
 
-      {/* Add to Cart Button */}
-      <Pressable
-        style={({ pressed }) => [
-          {
-            backgroundColor: pressed ? '#FF3C00' : '#DB3C25',
-          },
-          styles.btnCustom,
-        ]}
-      >
-        <SimpleLineIcons name="bag" size={14} color="white" />
-        <Text style={{ color: 'white' }}>Add to cart</Text>
+        {/* Add to Cart Button */}
+        <Pressable
+          style={({ pressed }) => [
+            {
+              backgroundColor: pressed ? '#FF3C00' : '#DB3C25',
+            },
+            styles.btnCustom,
+          ]}
+        >
+          <SimpleLineIcons name="bag" size={14} color="white" />
+          <Text style={{ color: 'white' }}>Add to cart</Text>
+        </Pressable>
       </Pressable>
-    </Pressable>
+
+    </View>
+
+
+    // <Pressable
+    //   style={({ pressed }) => [
+    //     {
+    //       backgroundColor: pressed ? '#ECECEC' : 'white',
+    //     },
+    //     styles.wrapperCustom,
+    //   ]}
+    //   onPress={onPressHandler}
+    // >
+
+    //   {/* Icon plus Product Image Section */}
+    //   <View style={styles.sectionImage}>
+    //     <View style={styles.heartIcon}>
+    //       <Feather name="heart" size={16} color="black" />
+    //     </View>
+    //     <Image
+    //       style={styles.image}
+    //       source={image}
+    //     />
+    //   </View>
+    //   {/*End of Icon plus Product Image Section */}
+    //   {/* Text Section */}
+    //   <View style={styles.sectionText}>
+    //     <Text>{productName}</Text>
+    //     <Text style={styles.priceText}>{productPrice}</Text>
+    //   </View>
+    //   {/*End of Text Section */}
+
+    //   {/* Add to Cart Button */}
+    //   <Pressable
+    //     style={({ pressed }) => [
+    //       {
+    //         backgroundColor: pressed ? '#FF3C00' : '#DB3C25',
+    //       },
+    //       styles.btnCustom,
+    //     ]}
+    //   >
+    //     <SimpleLineIcons name="bag" size={14} color="white" />
+    //     <Text style={{ color: 'white' }}>Add to cart</Text>
+    //   </Pressable>
+    // </Pressable>
 
   );
 }
+
+
+
 
 const styles = StyleSheet.create({
   container: {

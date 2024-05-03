@@ -2,12 +2,14 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 
 import { useNavigation } from '@react-navigation/native';
 import ProductDetails from '../../screens/ProductDetailScreen';
 
 
-export default function NewOrder({ productName, productPrice, image }) {
+export default function NewOrder({ cartItem }) {
 
 
 
@@ -17,7 +19,7 @@ export default function NewOrder({ productName, productPrice, image }) {
   <Pressable
    style={({ pressed }) => [
     {
-     backgroundColor: pressed ? 'rgba(210, 230, 255, 0.4)' : 'white',
+     backgroundColor: pressed ? '#ECECEC' : 'white',
     },
     styles.wrapperCustom,
    ]}
@@ -28,34 +30,30 @@ export default function NewOrder({ productName, productPrice, image }) {
    <View style={styles.sectionImage}>
     <Image
      style={styles.image}
-     source={image}
+     source={cartItem.image}
     />
    </View>
    {/*End of Product Image Section */}
 
    {/* Text Section */}
    <View style={styles.sectionText}>
-    <Text>{productName}</Text>
-    <Text style={styles.priceText}>{productPrice}</Text>
-    <View style={styles.heartIcon}>
-     <Feather name="heart" size={16} color="black" />
+    <Text>{cartItem.productName}</Text>
+    <Text style={styles.priceText}>{cartItem.productPrice}</Text>
+    <View >
+     <AntDesign name="delete" size={20} color="black" />
     </View>
    </View>
    {/*End of Text Section */}
 
    {/* Counter Button */}
-   <Pressable
-    style={({ pressed }) => [
-     {
-      backgroundColor: pressed ? 'rgba(210, 230, 255, 0.4)' : '#DB3C25',
-     },
-     styles.btnCustom,
-    ]}
-   >
-    <SimpleLineIcons name="bag" size={14} color="white" />
-    <Text style={{ color: 'white' }}>1</Text>
-    <SimpleLineIcons name="bag" size={14} color="white" />
-   </Pressable>
+   
+   <View >
+    <View style={{ backgroundColor: "#f9f9f9", width: 30, borderRadius: 5, padding: 5 }}><Entypo name="minus" size={20} color="gray" /></View>
+
+    <Text style={{ fontSize: 18,marginLeft:10, marginVertical:5 }}>1</Text>
+    <View style={{ backgroundColor: "#f9f9f9", width: 30, borderRadius: 5, padding: 5 }}><Entypo name="plus" size={20} color="gray" /></View>
+   </View>
+   
   </Pressable>
 
  );
@@ -68,16 +66,13 @@ const styles = StyleSheet.create({
   alignItems: "center",
 
  },
- heartIcon: {
-  alignSelf: 'flex-end'
- },
+ 
  wrapperCustom: {
-  margin: 5,
-  borderWidth: 1,
-  padding: 15,
-  borderRadius: 8,
-  height: 250,
-  width: 150
+  flexDirection: "row",
+  justifyContent:"space-between",
+  width: "80%",
+  marginHorizontal: 20,
+  padding:10,
 
 
  },
@@ -94,24 +89,10 @@ const styles = StyleSheet.create({
 
  },
  sectionText: {
-  flexDirection: 'row',
-  gap: 8,
-  height: 30,
-  padding: 5,
-  justifyContent: "center",
+  justifyContent:"space-evenly"
  },
  priceText: {
   color: '#DB3C25',
  },
- btnCustom: {
-  color: '#DB3C25',
-  flexDirection: 'row',
-  gap: 5,
-  borderRadius: 20,
-  width: 100,
-  padding: 10,
-  alignItems: 'center',
-  alignSelf: 'center',
-  marginTop: 20,
- }
+ 
 });

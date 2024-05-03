@@ -10,97 +10,103 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Feather } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
 export default function HomeScreen({ navigation }) {
- const [userInput, setUserInput] = React.useState("")
+  const [userInput, setUserInput] = React.useState("")
 
 
 
- const filterData = (item) => {
-  // if input is empty
-  if (userInput === "") {
-   return (
-    <ProductCard
-     image={item.image}
-     productName={item.productName}
-     productPrice={item.productPrice}
+  const filterData = (item) => {
+    // if input is empty
+    if (userInput === "") {
+      return (
+        <ProductCard
+          ProductItems={item}
 
-    />
-   );
+        />
+      );
+    }
+
+    // if user input is populated
+    if (item.productName.toLowerCase().includes(userInput.toLowerCase())) {
+      return (
+        <ProductCard
+          ProductItems={item}
+
+        />
+      )
+    }
+
+
   }
+  const filteredData = filterData ? ProductItems.filter(filterData) : ProductItems;
 
-  // if user input is populated
-  if (item.productName.toLowerCase().includes(userInput.toLowerCase())) {
-   return (
-    <ProductCard
-     image={item.image}
-     productName={item.productName}
-     productPrice={item.productPrice}
+  return (
+    <View style={styles.homeContainer}>
+      <StatusBar style="dark" />
+      {/* Search Input area */}
+      <SafeAreaView>
+        <Feather name="search" size={24} color="black" />
+        <TextInput
+          style={styles.input}
 
-    />
-   )
-  }
-  else {
-   <Text style={{ fontSize: 20, textAlign: 'center' }}>
-    Data does not exist
-   </Text>
-  }
- 
- }
+          value={userInput}
+          onChangeText={(text) => setUserInput(text)}
+          placeholder="Search"
+        />
+      </SafeAreaView>
+      {/* Product list */}
+      <SafeAreaView style={{ flex: 1, }}>
+        {filteredData.length === 0 ? (
+          <View style={{ paddingTop:50}}>
+            <Text style={{ fontSize: 30, fontWeight: 'bold', textAlign: 'center', color: '#DB3C25', }}>
+              OOPS!
+            </Text>
+            <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center', color: '#DB3C25', }}>
+              That is not available
+            </Text>
+            
+            <Text style={{ fontSize: 20, textAlign: 'center', marginTop:10 }}>
+              Try searching for something else
+            </Text>
+          </View>
+        ) :
+          <FlatList
 
- return (
-  <View style={styles.homeContainer}>
-   <StatusBar style="dark" />
-   <SafeAreaView>
-    <TextInput
-     style={styles.input}
-     
-     value={userInput}
-     onChangeText={(text)=>setUserInput(text)}
-     placeholder="Search"
-    />
-   </SafeAreaView>
-
-   <SafeAreaView style={{ flex: 1, }}>
-    {filterData.length === 0 ? (
-     <Text style={{ fontSize: 20, textAlign: 'center' }}>
-      Data does not exist
-     </Text>
-    ) : <FlatList
-
-     numColumns={2}
-     showsVerticalScrollIndicator={false}
-     horizontal={false}
-     data={ProductItems}
-     keyExtractor={(item, index) => 'key' + index}
-     renderItem={({ item }) => filterData(item)}
-    />}
+            numColumns={2}
+            showsVerticalScrollIndicator={false}
+            horizontal={false}
+            data={filteredData}
+            keyExtractor={(item, index) => 'key' + index}
+            renderItem={({ item }) => <ProductCard ProductItems={item} />}
+          />
+        }
 
 
-    
-   </SafeAreaView>
-  </View>
+      </SafeAreaView>
+    </View>
 
- )
+  )
 }
 const styles = StyleSheet.create({
- homeContainer: {
-  alignItems: "center",
-  flex: 1,
-  backgroundColor: "#F9F9F9",
- },
- input: {
-  height: 40,
-  width: 250,
-  margin: 10,
-  marginTop: 42,
-  borderWidth: 1,
-  padding: 10,
-  borderRadius: 8,
+  homeContainer: {
+    alignItems: "center",
+    flex: 1,
+    backgroundColor: "#F9F9F9",
+  },
+  input: {
+    height: 40,
+    width: 250,
+    margin: 10,
+    marginTop: 42,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 8,
 
 
- },
- 
+  },
+
 })
