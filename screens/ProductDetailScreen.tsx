@@ -4,7 +4,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
 
-
+import { useDispatch } from 'react-redux';
+import { addItem } from '../store/cartReducer';
 
 
 
@@ -13,6 +14,7 @@ const windowWidth = Dimensions.get('window').width;
 export default function ProductDetailsScreen({ navigation, route }) {
 
   const item = route.params;
+  const dispatch = useDispatch()
   
 // Dropdown Area
   const ExpandableItem = ({ title, content }) => {
@@ -124,7 +126,8 @@ export default function ProductDetailsScreen({ navigation, route }) {
               },
               styles.Cartbtn,
             ]}
-            onPress={() => navigation.navigate("Cart", item)}
+            onPress={()=> alert("added to cart")}
+            // onPress={() => navigation.navigate("Cart", item)}
           >
             <Text style={{ color: 'white' }}>Add to cart</Text>
           </Pressable>
@@ -137,7 +140,10 @@ export default function ProductDetailsScreen({ navigation, route }) {
               },
               styles.Subbtn,
             ]}
-            
+            onPress={() => {
+              alert("subscribed to a plan") ,
+                dispatch(addItem(item))
+            }}
           >
             <Text style={{ color: '#DB3C25' }}>Subscribe to a Plan</Text>
           </Pressable>

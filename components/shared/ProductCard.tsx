@@ -5,6 +5,8 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 
 import { useNavigation } from '@react-navigation/native';
 import { ProductItems } from './ProductItems';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../store/cartReducer';
 
 
 
@@ -14,6 +16,7 @@ import { ProductItems } from './ProductItems';
 export default function ProductCard({ ProductItems }) {
 
   const navigation = useNavigation();
+  const dispatch=useDispatch()
 
 
 
@@ -52,6 +55,7 @@ export default function ProductCard({ ProductItems }) {
             },
             styles.btnCustom,
           ]}
+          onPress={()=>{dispatch(addItem(ProductItems))}}
         >
           <SimpleLineIcons name="bag" size={14} color="white" />
           <Text style={{ color: 'white' }}>Add to cart</Text>
@@ -60,48 +64,6 @@ export default function ProductCard({ ProductItems }) {
 
     </View>
 
-
-    // <Pressable
-    //   style={({ pressed }) => [
-    //     {
-    //       backgroundColor: pressed ? '#ECECEC' : 'white',
-    //     },
-    //     styles.wrapperCustom,
-    //   ]}
-    //   onPress={onPressHandler}
-    // >
-
-    //   {/* Icon plus Product Image Section */}
-    //   <View style={styles.sectionImage}>
-    //     <View style={styles.heartIcon}>
-    //       <Feather name="heart" size={16} color="black" />
-    //     </View>
-    //     <Image
-    //       style={styles.image}
-    //       source={image}
-    //     />
-    //   </View>
-    //   {/*End of Icon plus Product Image Section */}
-    //   {/* Text Section */}
-    //   <View style={styles.sectionText}>
-    //     <Text>{productName}</Text>
-    //     <Text style={styles.priceText}>{productPrice}</Text>
-    //   </View>
-    //   {/*End of Text Section */}
-
-    //   {/* Add to Cart Button */}
-    //   <Pressable
-    //     style={({ pressed }) => [
-    //       {
-    //         backgroundColor: pressed ? '#FF3C00' : '#DB3C25',
-    //       },
-    //       styles.btnCustom,
-    //     ]}
-    //   >
-    //     <SimpleLineIcons name="bag" size={14} color="white" />
-    //     <Text style={{ color: 'white' }}>Add to cart</Text>
-    //   </Pressable>
-    // </Pressable>
 
   );
 }

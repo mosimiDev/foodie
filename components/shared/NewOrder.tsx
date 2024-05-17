@@ -9,10 +9,10 @@ import { useNavigation } from '@react-navigation/native';
 import ProductDetails from '../../screens/ProductDetailScreen';
 
 
-export default function NewOrder({ cartItem }) {
+export default function NewOrder({ newItem }) {
 
 
-
+ // const cartItem = route.params;
 
  return (
 
@@ -30,15 +30,15 @@ export default function NewOrder({ cartItem }) {
    <View style={styles.sectionImage}>
     <Image
      style={styles.image}
-     source={cartItem.image}
+     source={newItem.image}
     />
    </View>
    {/*End of Product Image Section */}
 
    {/* Text Section */}
    <View style={styles.sectionText}>
-    <Text>{cartItem.productName}</Text>
-    <Text style={styles.priceText}>{cartItem.productPrice}</Text>
+    <Text>{newItem.productName}</Text>
+    <Text style={styles.priceText}>{newItem.productPrice}</Text>
     <View >
      <AntDesign name="delete" size={20} color="black" />
     </View>

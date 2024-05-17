@@ -8,12 +8,17 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { addItem } from '../../store/cartReducer';
 
 const Stack = createNativeStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomTab() {
+
+ const { items } = useSelector((state: RootState) => state.cart)
  return (
   <Tab.Navigator
    screenOptions={({ route }) => ({

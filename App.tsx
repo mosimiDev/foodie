@@ -14,6 +14,8 @@ import BottomTab from './components/layouts/BottomTab';
 
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,7 +25,7 @@ export default function App() {
 
   return (
 
-      
+      <Provider store={store}>
     <SafeAreaProvider>
       <StatusBar />
         <NavigationContainer>
@@ -33,12 +35,13 @@ export default function App() {
             <Stack.Screen name="BoardScreen" component={OnBoardScreen} />
             <Stack.Screen name="Home" component={BottomTab} />
             <Stack.Screen name="Menu" component={MenuScreen} />
-            <Stack.Screen name="Cart" component={CartScreen} />
+            <Stack.Screen name="Cart" component={CartScreen}  />
             <Stack.Screen name="Account" component={AccountScreen} />
             <Stack.Screen name="ProductDetails" component={ProductDetailsScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaProvider>
+    </Provider>
  
 
 
