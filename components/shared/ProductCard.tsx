@@ -43,7 +43,7 @@ export default function ProductCard({ ProductItems }) {
         {/* Text Section */}
         <View style={styles.sectionText}>
           <Text>{ProductItems.productName}</Text>
-          <Text style={styles.priceText}>{ProductItems.productPrice}</Text>
+          <Text style={styles.priceText}>£{ProductItems.productPrice}</Text>
         </View>
         {/*End of Text Section */}
 

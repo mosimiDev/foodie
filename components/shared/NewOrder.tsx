@@ -4,15 +4,39 @@ import { Feather } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 import { useNavigation } from '@react-navigation/native';
 import ProductDetails from '../../screens/ProductDetailScreen';
+import { ProductItems } from './ProductItems';
 
 
-export default function NewOrder({ newItem }) {
+interface NewOrderProps {
+ // ProductItems:any
+ image: string;
+ productName: string;
+ productPrice: number;
+ qty: number;
+ onRemove: () => void;
+ onAdd: () => void;
+ addable: boolean;
+ deletable: boolean;
+}
+
+const NewOrder: React.FC<NewOrderProps> = ({
+ // ProductItems,
+ image,
+ productName,
+ productPrice,
+ qty,
+ onRemove,
+ onAdd,
+ addable,
+ deletable, }) =>{
 
 
- // const cartItem = route.params;
+ 
 
  return (
 
@@ -30,15 +54,15 @@ export default function NewOrder({ newItem }) {
    <View style={styles.sectionImage}>
     <Image
      style={styles.image}
-     source={newItem.image}
+     source={{ uri: image }}
     />
    </View>
    {/*End of Product Image Section */}
 
    {/* Text Section */}
    <View style={styles.sectionText}>
-    <Text>{newItem.productName}</Text>
-    <Text style={styles.priceText}>{newItem.productPrice}</Text>
+    <Text>{productName}</Text>
+    <Text style={styles.priceText}>{productPrice}</Text>
     <View >
      <AntDesign name="delete" size={20} color="black" />
     </View>
@@ -48,16 +72,38 @@ export default function NewOrder({ newItem }) {
    {/* Counter Button */}
    
    <View >
-    <View style={{ backgroundColor: "#f9f9f9", width: 30, borderRadius: 5, padding: 5 }}><Entypo name="minus" size={20} color="gray" /></View>
 
-    <Text style={{ fontSize: 18,marginLeft:10, marginVertical:5 }}>1</Text>
-    <View style={{ backgroundColor: "#f9f9f9", width: 30, borderRadius: 5, padding: 5 }}><Entypo name="plus" size={20} color="gray" /></View>
+    {/* Reduce Button */}
+
+    {deletable && (
+     <Pressable style={{ backgroundColor: "#f9f9f9", width: 30, borderRadius: 5, padding: 5 }} onPress={onRemove}>
+      <Entypo name="minus" size={20} color="gray" />
+     </Pressable>
+    )}
+
+    {/* End of Reduce Button*/}
+
+    {/* Quantity */}
+    <Text style={{ fontSize: 18, marginLeft: 10, marginVertical: 5 }}>{qty}</Text>
+    {/* End of Quantity */}
+
+    {/* Add Button */}
+
+    {addable && (
+     <Pressable style={{ backgroundColor: "#f9f9f9", width: 30, borderRadius: 5, padding: 5 }} onPress={onAdd}>
+      <Entypo name="plus" size={20} color="gray" />
+     </Pressable>
+    )}
+
+    {/*End of Add Button */}
+
    </View>
    
   </Pressable>
 
  );
 }
+export default NewOrder;
 
 const styles = StyleSheet.create({
  container: {
