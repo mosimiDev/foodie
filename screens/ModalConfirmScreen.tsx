@@ -1,30 +1,27 @@
-import React, { useEffect, useRef } from 'react'
-import { StyleSheet, View, Dimensions, Animated, Easing, Text, Pressable } from 'react-native';
-import AppButton from '../components/shared/AppButton';
-import { Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useState,useEffect, useRef } from 'react'
+import { StyleSheet, Button, View, Dimensions, Animated, Easing, Text, Pressable } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import ModalSucessScreen from './ModalSuccessScreen';
 import { clearCart } from '../store/cartReducer';
 import { useDispatch, useSelector } from 'react-redux';
 
+export default function ModalConfirmScreen({ visible, options, duration, onClose }) {
 
-
-
-export default function ModalSucessScreen({ visible, options, duration, onClose }) {
- const navigation = useNavigation();
+ const [successvisible, setSucessVisible] = useState(false);
  const dispatch = useDispatch()
- 
- const pulseAnim = useRef(new Animated.Value(0)).current;
 
- const fadeIn = () => {
-  // Will change fadeAnim value to 1 in 5 seconds
-  Animated.timing(pulseAnim, {
-   toValue: 1,
-   duration: 5000,
-   easing: Easing.inOut(Easing.ease),
-   useNativeDriver: true,
-  }).start();
- };
+ const handleVisibleModal = () => {
+  setSucessVisible(true);
+  onClose()
+
+ }
+
+ const handleClose = () => {
+  setSucessVisible(false);
+ }
+ const clearCartItems = () => {
+  dispatch(clearCart())
+ }
 
  const { height } = Dimensions.get('screen');
  const startPointY = options?.from === 'top' ? -height : height;
@@ -47,14 +44,10 @@ export default function ModalSucessScreen({ visible, options, duration, onClose 
   }).start();
  }
 
- const clearCartItems = () => {
-  dispatch(clearCart())
- }
-
  const onPress = () => {
   onClose();
-  clearCartItems();
  }
+
 
  const generateBackgroundOpacity = () => {
   if (startPointY >= 0) {
@@ -77,29 +70,32 @@ export default function ModalSucessScreen({ visible, options, duration, onClose 
    <Animated.View pointerEvents='none' style={[styles.outerContainer, { opacity: generateBackgroundOpacity() }]} />
    <Animated.View style={[styles.container, { transform: [{ translateY: transY.current }] }]}>
     <View style={styles.innerContainer}>
-     {/* <Button title='Close Modal' onPress={onPress} /> */}
-     <Animated.View
-      style={[
-       styles.fadingContainer,
-       {
-        // Bind opacity to animated value
-        opacity: pulseAnim,
-       },
-      ]}>
-      
-     </Animated.View>
-     <Pressable onPress={onPress} style={{ alignSelf: 'flex-end', paddingRight:10, bottom:30 }}>
-      <Ionicons name="close" size={20} color="black" />
-     </Pressable>
      
-     
-     <Text style={{ color: "black", fontWeight: "bold", fontSize: 20 }}> Sucess</Text>
-     <Feather name="check-circle" size={24} color="green" />
-     <Text style={{ color: "black", marginVertical: 20, fontSize: 18 }}> Order Placed. We will contact you soon</Text>
-     
-     
+     <View>
+      <Text style={{ color: "black", fontWeight:"bold", fontSize:20 }}> Confirm Order</Text>
+      <Text style={{ color: "black", marginVertical: 20, fontSize: 18 }}>Are you sure you want to place this order?</Text>
+      {/* Buttons section */}
+      <View style={{display:"flex", flexDirection:"row",justifyContent:"space-evenly"}}>
+       <Pressable onPress={handleVisibleModal} >
+        <Text style={{ color: "black" }}>Yes</Text>
+        
+       </Pressable>
+       <Pressable onPress={onPress} >
+        <Text style={{ color: "black" }}>No</Text>
+       </Pressable>
+       
+      </View>
+      {/*End of Buttons section */}
+     </View>
     </View>
+    
    </Animated.View>
+   <ModalSucessScreen
+
+    visible={successvisible}
+    options={{ type: 'slide', from: 'top' }}
+    duration={500}
+    onClose={handleClose} />
   </>
  )
 }
@@ -111,7 +107,7 @@ const styles = StyleSheet.create({
   height: '100%',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: '#2b4369',
+  backgroundColor: '#c7c4bf',
  },
  container: {
   position: 'absolute',
@@ -128,8 +124,7 @@ const styles = StyleSheet.create({
   alignItems: 'center',
   borderRadius: 20
  },
- fadingContainer: {
-  padding: 20,
-  
- },
+ closeIcon: {
+  alignSelf:'flex-end'
+ }
 })

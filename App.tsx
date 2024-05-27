@@ -15,7 +15,8 @@ import BottomTab from './components/layouts/BottomTab';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { Provider } from 'react-redux';
-import { store } from './store/store';
+import { persistor, store } from './store/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,7 +26,8 @@ export default function App() {
 
   return (
 
-      <Provider store={store}>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
     <SafeAreaProvider>
       <StatusBar />
         <NavigationContainer>
@@ -40,7 +42,8 @@ export default function App() {
             <Stack.Screen name="ProductDetails" component={ProductDetailsScreen} />
           </Stack.Navigator>
         </NavigationContainer>
-      </SafeAreaProvider>
+        </SafeAreaProvider>
+      </PersistGate>
     </Provider>
  
 

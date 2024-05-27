@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface CartItem{
+interface CartItem {
  id: number;
  productName: string;
  image: string;
@@ -8,13 +8,13 @@ interface CartItem{
  sum: number;
  productPrice: number;
 }
-interface Cartstate{
+interface Cartstate {
  items: CartItem[];
 }
 
-const initialState:Cartstate = {
+const initialState: Cartstate = {
  items: [],
-}; 
+};
 const cartSlice = createSlice({
  name: "cart",
  initialState,
@@ -24,7 +24,7 @@ const cartSlice = createSlice({
     item => item.id == action.payload.id,
    )
    if (existingItem) {
-    
+
     existingItem.qty += 1;
     existingItem.sum += action.payload?.productPrice;
    } else {
@@ -32,7 +32,7 @@ const cartSlice = createSlice({
      ...action.payload,
      qty: 1,
      sum: action.payload?.productPrice,
-     
+
     })
    }
   },
@@ -48,8 +48,12 @@ const cartSlice = createSlice({
     state.items = state.items.filter((item) => item.id !== action.payload.id);
    }
   },
+  clearCart: (state) => {
+   state.items = []
+   return state;
+  },
  }
 })
 
-export const {addItem, removeItem } = cartSlice.actions
+export const { addItem, removeItem, clearCart } = cartSlice.actions
 export default cartSlice.reducer

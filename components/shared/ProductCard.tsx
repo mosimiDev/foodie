@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, Pressable, FlatList } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
@@ -6,7 +6,8 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { ProductItems } from './ProductItems';
 import { useDispatch } from 'react-redux';
-import { addItem } from '../../store/cartReducer';
+import { addItem, removeItem } from '../../store/cartReducer';
+import Toast from 'react-native-root-toast';
 
 
 
@@ -16,10 +17,22 @@ import { addItem } from '../../store/cartReducer';
 export default function ProductCard({ ProductItems }) {
 
   const navigation = useNavigation();
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
+  
 
+  const [showToast, setShowToast] = useState(false);
+  const [favouriteToast, setFavouriteToast] = useState(false);
 
+const cartToast=() => {
+    setTimeout(() => setShowToast(true), 500); // show toast after 1/2s
+    setTimeout(() => setShowToast(false), 3000); // hide toast after 3s
+  }
+  const showFavouriteToast=() => {
+    setTimeout(() => setFavouriteToast(true), 500); // show toast after 1/2s
+    setTimeout(() => setFavouriteToast(false), 3000); // hide toast after 3s
+  }
 
+  
   return (
     <View>
 
@@ -31,9 +44,21 @@ export default function ProductCard({ ProductItems }) {
       ]}>
         {/* Icon plus Product Image Section */}
         <View style={styles.sectionImage}>
-          <View style={styles.heartIcon}>
+          {<Pressable onPress={(pressed) => { pressed ? <Feather name="heart" size={16} color="black" /> : <Feather name="heart" size={16} color="red" />}}>
+          </Pressable>}
+          <Text>
+            <Toast
+              visible={favouriteToast}
+              position={-50}
+              shadow={false}
+              animation={true}
+              hideOnPress={true}
+              backgroundColor='gray'
+            >added to favourites</Toast>
+          </Text>
+          {/* <Pressable style={styles.heartIcon}>
             <Feather name="heart" size={16} color="black" />
-          </View>
+          </Pressable> */}
           <Image
             style={styles.image}
             source={ProductItems.image}
@@ -55,13 +80,26 @@ export default function ProductCard({ ProductItems }) {
             },
             styles.btnCustom,
           ]}
-          onPress={()=>{dispatch(addItem(ProductItems))}}
+          onPress={() => {
+            dispatch(addItem(ProductItems));
+            cartToast();
+          }}
         >
           <SimpleLineIcons name="bag" size={14} color="white" />
           <Text style={{ color: 'white' }}>Add to cart</Text>
         </Pressable>
       </Pressable>
-
+      <Text>
+        <Toast
+          visible={showToast}
+          position={-50}
+          shadow={false}
+          animation={true}
+          hideOnPress={true}
+          backgroundColor='gray'
+        >added to cart successfully</Toast>
+      </Text>
+      
     </View>
 
 

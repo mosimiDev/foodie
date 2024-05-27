@@ -37,15 +37,17 @@ export default function MenuScreen({ navigation }: MenuScreenProps) {
     <View style={styles.menuContainer}>
       <StatusBar style="dark" />
       {/* Search Input area */}
-      <SafeAreaView>
-        <Feather name="search" size={24} color="black" />
+      <View style={styles.searchSection}>
+        <Feather name="search" size={14} color="black" style={styles.searchIcon} />
         <TextInput
           style={styles.input}
-          onChangeText={(text) => setUserText(text)}
+
           value={userText}
+          onChangeText={(text) => setUserText(text)}
           placeholder="Search"
+          placeholderTextColor={"grey"}
         />
-      </SafeAreaView>
+      </View>
       {/* Product list */}
       <SafeAreaView style={{ flex: 1 }}>
         {filteredData.length === 0 ? (
@@ -87,14 +89,25 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   input: {
-    height: 40,
-    width: 250,
-    margin: 10,
-    marginTop: 42,
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 8,
+    flex: 1,
+    paddingTop: 10,
+    paddingRight: 10,
+    paddingBottom: 10,
+    paddingLeft: 3,
 
   },
+  searchSection: {
+    padding: 2,
+    margin: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderBlockColor: "gray",
+    alignItems: 'center',
+    borderRadius: 15,
+  },
+  searchIcon: {
+    padding: 10,
+  }
 
 })

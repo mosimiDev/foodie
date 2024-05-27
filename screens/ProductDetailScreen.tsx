@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, Pressable,Dimensions, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable,Dimensions, SafeAreaView, ScrollView, StyleSheet, Text, View, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
@@ -15,6 +15,8 @@ export default function ProductDetailsScreen({ navigation, route }) {
 
   const item = route.params;
   const dispatch = useDispatch()
+
+
   
 // Dropdown Area
   const ExpandableItem = ({ title, content }) => {
@@ -24,6 +26,7 @@ export default function ProductDetailsScreen({ navigation, route }) {
       setExpanded(!expanded);
     };
 
+    
     return (
       <View style={{
         marginVertical: 10,
@@ -40,6 +43,24 @@ export default function ProductDetailsScreen({ navigation, route }) {
   };
 
   //End of Dropdown Area
+
+  // Alert Function
+
+  const AddToCartAlert = () =>
+    Alert.alert(
+      "Added to Cart",
+      "This Item has been added to cart",
+      [
+        {
+          text: "Go To Cart",
+          onPress: () => navigation.navigate("Cart"),
+          style: "cancel",
+        },
+        { text: "Continue Shopping" },
+
+      ],
+      { cancelable: false }
+    );
 
 
   return (
@@ -78,7 +99,7 @@ export default function ProductDetailsScreen({ navigation, route }) {
         <View style={styles.textSection}>
         <View style={{flexDirection:"row",  width:"50%",marginBottom:10}}>
             <Text style={{ fontSize: 22, fontWeight: '400',  }} >{item.productName}</Text>
-            <Text style={{ fontSize: 20,color:"#FF3C00", paddingTop:1, marginLeft:10}}>{item.productPrice}</Text>
+            <Text style={{ fontSize: 20,color:"#FF3C00", paddingTop:1, marginLeft:10}}>£{item.productPrice}</Text>
         </View>
         {/*End of Details Title x Price */}
         {/* Details Description */}
@@ -126,8 +147,11 @@ export default function ProductDetailsScreen({ navigation, route }) {
               },
               styles.Cartbtn,
             ]}
-            onPress={()=> alert("added to cart")}
-            // onPress={() => navigation.navigate("Cart", item)}
+            onPress={() => {
+              AddToCartAlert();
+              dispatch(addItem(item));
+            }}
+            // onPress={() => navigation.navigate("Cart")}
           >
             <Text style={{ color: 'white' }}>Add to cart</Text>
           </Pressable>
@@ -141,8 +165,7 @@ export default function ProductDetailsScreen({ navigation, route }) {
               styles.Subbtn,
             ]}
             onPress={() => {
-              alert("subscribed to a plan") ,
-                dispatch(addItem(item))
+              alert("subscribed to a plan")
             }}
           >
             <Text style={{ color: '#DB3C25' }}>Subscribe to a Plan</Text>

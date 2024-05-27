@@ -9,7 +9,7 @@ import { RootState } from '../store/store';
 import { addItem, removeItem } from '../store/cartReducer';
 import { ProductItems } from '../components/shared/ProductItems';
 import OrderList from '../components/shared/OrderList';
-import Modal from './ModalSuccessScreen';
+import ModalConfirmScreen from './ModalConfirmScreen';
 
 export default function CartScreen({ navigation }) {
      const [visible, setVisible] = useState(false);
@@ -28,20 +28,12 @@ export default function CartScreen({ navigation }) {
 
 
      const handleOrderPress = useCallback(() => {
-          if (items.length < 1) {
+          if (items.length < 0) {
                Alert.alert('Empty Order', 'Please Add An Order To Continue', [{ text: 'OK' }], {
                     cancelable: false,
                });
           } else {
-               Alert.alert(
-                    'Confirm Order',
-                    'Are you sure you want to place this order?',
-                    [
-                         { text: 'Yes' },
-                         { text: 'No' },
-                    ],
-               );
-               // navigation.navigate('OrdersScreen');
+               
                setVisible(true);
           }
      }, []);
@@ -55,17 +47,13 @@ export default function CartScreen({ navigation }) {
           setVisible(false);
      }
 
-     // console.log(items)
-          // const orderExists = items ? ProductItems.filter(items) : ProductItems;
      
      return (
           <SafeAreaView style={styles.cartContainer}>
 
                {items.length > 0 ?  (
-                    <View style={{ paddingBottom: 300 }}>
-                         <View style={{ marginVertical: 20, marginLeft: 15, backgroundColor: "#fff", width: 35, borderRadius: 5 }}>
-                              <MaterialIcons name="keyboard-arrow-left" size={30} color="black" onPress={navigation.goBack} />
-                         </View>
+                    <View style={{ paddingBottom: 100 }}>
+                         
                          {/* List items section */}
                          <View >
                               <OrderList onAdd={(item) => handleItemAdd(item)}
@@ -92,7 +80,7 @@ export default function CartScreen({ navigation }) {
                          </View>
                          {/*End of Lower Layout plus Button */}
                          {/* Modal section */}
-                         <Modal
+                         <ModalConfirmScreen
                               visible={visible}
                               options={{ type: 'slide', from: 'top' }}
                               duration={500}

@@ -62,10 +62,10 @@ const NewOrder: React.FC<NewOrderProps> = ({
    {/* Text Section */}
    <View style={styles.sectionText}>
     <Text>{productName}</Text>
-    <Text style={styles.priceText}>{productPrice}</Text>
-    <View >
+    <Text style={styles.priceText}>£{productPrice}</Text>
+    <Pressable onPress={onRemove}>
      <AntDesign name="delete" size={20} color="black" />
-    </View>
+    </Pressable>
    </View>
    {/*End of Text Section */}
 
