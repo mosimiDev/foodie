@@ -52,7 +52,12 @@ export default function BottomTab() {
    <Tab.Screen
     name="Cart"
     component={CartScreen}
-    options={{ headerStyle: { backgroundColor: "#F9F9F9" } }}
+    options={{
+     headerStyle: { backgroundColor: "#F9F9F9" },
+     tabBarBadge: items ? items.length : undefined,
+     tabBarBadgeStyle:{backgroundColor:"gray"}
+    }}
+    
    />
    <Tab.Screen
     name="Account"

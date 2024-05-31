@@ -42,7 +42,7 @@ const cartToast=() => {
         },
         styles.wrapperCustom,
       ]}>
-        {/* Icon plus Product Image Section */}
+        {/*  Product Image Section */}
         <View style={styles.sectionImage}>
           {<Pressable onPress={(pressed) => { pressed ? <Feather name="heart" size={16} color="black" /> : <Feather name="heart" size={16} color="red" />}}>
           </Pressable>}
@@ -87,22 +87,20 @@ const cartToast=() => {
         >
           <SimpleLineIcons name="bag" size={14} color="white" />
           <Text style={{ color: 'white' }}>Add to cart</Text>
+          <Text>
+            <Toast
+              visible={showToast}
+              position={-50}
+              shadow={false}
+              animation={true}
+              hideOnPress={true}
+              backgroundColor='gray'
+            >added to cart successfully</Toast>
+          </Text>
         </Pressable>
       </Pressable>
-      <Text>
-        <Toast
-          visible={showToast}
-          position={-50}
-          shadow={false}
-          animation={true}
-          hideOnPress={true}
-          backgroundColor='gray'
-        >added to cart successfully</Toast>
-      </Text>
       
     </View>
-
-
   );
 }
 
@@ -137,8 +135,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     resizeMode: 'contain',
     objectFit: 'cover',
-    height: 80,
-    width: 76,
+    height: 90,
+    width: 70,
 
   },
   sectionText: {

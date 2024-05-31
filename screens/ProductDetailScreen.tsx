@@ -165,7 +165,11 @@ export default function ProductDetailsScreen({ navigation, route }) {
               styles.Subbtn,
             ]}
             onPress={() => {
-              alert("subscribed to a plan")
+              Alert.alert(
+                "You are Onboard",
+                ["You are subscribed to a plan"]. join(","),
+                [{ text: "OK" }]
+              );
             }}
           >
             <Text style={{ color: '#DB3C25' }}>Subscribe to a Plan</Text>
@@ -187,7 +191,7 @@ const styles = StyleSheet.create({
     height: 300,
   },
   productImg: {
-    width: 250,
+    width: 150,
     height:10,
     flex:1,
     objectFit:"cover"

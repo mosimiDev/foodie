@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import HomeScreen from './screens/HomeScreen';
 import MenuScreen from './screens/MenuScreen';
 import CartScreen from './screens/CartScreen';
@@ -17,12 +17,16 @@ import { StatusBar } from 'expo-status-bar';
 import { Provider } from 'react-redux';
 import { persistor, store } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import { useNavigation } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+ 
+ 
+  
 
   return (
 
@@ -35,7 +39,7 @@ export default function App() {
             screenOptions={{ headerShown: false }}
           >
             <Stack.Screen name="BoardScreen" component={OnBoardScreen} />
-            <Stack.Screen name="Home" component={BottomTab} />
+              <Stack.Screen name="Homepage" component={BottomTab} options={{ gestureEnabled: false }} />
             <Stack.Screen name="Menu" component={MenuScreen} />
             <Stack.Screen name="Cart" component={CartScreen}  />
             <Stack.Screen name="Account" component={AccountScreen} />
@@ -45,10 +49,6 @@ export default function App() {
         </SafeAreaProvider>
       </PersistGate>
     </Provider>
- 
-
-
-
   );
 }
 

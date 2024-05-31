@@ -1,17 +1,15 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
-import Favourite from './Favourite';
-import { useNavigation } from '@react-navigation/native';
+
 
 
 
 export default function AccountScreen() {
- const navigation = useNavigation();
  return (
   <View style={styles.accountContainer}>
    {/* User Icon */}
@@ -46,9 +44,10 @@ export default function AccountScreen() {
    {/*End of Notification section */}
    
    {/* Refferals section */}
-   <Pressable style={styles.accVerSection} onPress={()=>navigation.navigate('Favourite')}>
-    <Text style={{ fontSize: 20 }}>Favourite</Text>
-   </Pressable>
+   <View style={styles.accVerSection}>
+    <Ionicons name="people-circle-outline" size={24} color="black" />
+    <Text style={{ fontSize: 20 }}>Refferals</Text>
+   </View>
    {/*End of Refferals section */}
 
    {/* Change password section */}

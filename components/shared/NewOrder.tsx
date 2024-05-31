@@ -14,7 +14,7 @@ import { ProductItems } from './ProductItems';
 
 interface NewOrderProps {
  // ProductItems:any
- image: string;
+ image: any;
  productName: string;
  productPrice: number;
  qty: number;
@@ -36,8 +36,6 @@ const NewOrder: React.FC<NewOrderProps> = ({
  deletable, }) =>{
 
 
- 
-
  return (
 
   <Pressable
@@ -54,7 +52,7 @@ const NewOrder: React.FC<NewOrderProps> = ({
    <View style={styles.sectionImage}>
     <Image
      style={styles.image}
-     source={{ uri: image }}
+     source={image}
     />
    </View>
    {/*End of Product Image Section */}
@@ -118,7 +116,9 @@ const styles = StyleSheet.create({
   justifyContent:"space-between",
   width: "80%",
   marginHorizontal: 20,
-  padding:10,
+  marginVertical:10,
+  padding: 10,
+  borderRadius: 20
 
 
  },
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   resizeMode: 'contain',
   objectFit: 'cover',
   height: 80,
-  width: 76,
+  width: 50,
 
  },
  sectionText: {

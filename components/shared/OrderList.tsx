@@ -4,6 +4,7 @@ import { FlatList } from 'react-native';
 import NewOrder from './NewOrder';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
+import { ProductItems } from './ProductItems';
 
 interface OrderListProps{
  onRemove: (item: any) => void;
@@ -24,7 +25,7 @@ const OrderList: React.FC<OrderListProps> = ({ onRemove,
    keyExtractor={(item) => item.productName}
    renderItem={({ item }) => (
     <NewOrder
-     image={item.image}
+     image={ProductItems.find((data)=>item.id===data.id).image}
      productName={item.productName}
      productPrice={item.productPrice}
      qty={item.qty}

@@ -52,7 +52,7 @@ export default function CartScreen({ navigation }) {
           <SafeAreaView style={styles.cartContainer}>
 
                {items.length > 0 ?  (
-                    <View style={{ paddingBottom: 100 }}>
+                    <View style={{ flex: 1, paddingBottom: 100 }}>
                          
                          {/* List items section */}
                          <View >
