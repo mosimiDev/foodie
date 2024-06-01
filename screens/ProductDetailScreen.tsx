@@ -6,15 +6,39 @@ import Swiper from 'react-native-swiper';
 
 import { useDispatch } from 'react-redux';
 import { addItem } from '../store/cartReducer';
+import { useNavigation } from '@react-navigation/native';
 
 
 
 const windowWidth = Dimensions.get('window').width;
 
-export default function ProductDetailsScreen({ navigation, route }) {
+interface ProductDetProps {
+
+  image: any;
+  productName: string;
+  productPrice: number;
+  qty: number;
+  onRemove: () => void;
+  onAdd: () => void;
+  addable: boolean;
+  deletable: boolean;
+  route: any;
+}
+
+const ProductDetailsScreen: React.FC<ProductDetProps> = ({ 
+  image,
+  productName,
+  productPrice,
+  route,
+  onRemove,
+  qty,
+  onAdd,
+  addable,
+  deletable, })=> {
 
   const item = route.params;
   const dispatch = useDispatch()
+  const navigation = useNavigation();
 
 
   
@@ -133,11 +157,21 @@ export default function ProductDetailsScreen({ navigation, route }) {
         </View>
 
         {/* Counter */}
-          <View style={{ flexDirection: "row", marginTop:70,  justifyContent: "space-between", width: "90%", marginBottom: 20, marginHorizontal: 10 }}>
-            <View style={{ backgroundColor: "#fff", width: 30, borderRadius: 5, padding: 5}}><Entypo name="minus" size={20} color="black" /></View>
-            
-            <Text style={{fontSize:18, marginTop:5}}>1</Text>
-            <View style={{ backgroundColor: "#fff", width: 30, borderRadius: 5, padding: 5 }}><Entypo name="plus" size={20} color="black" /></View>
+          <View style={{ flexDirection: "row", marginTop: 70, justifyContent: "space-between", width: "90%", marginBottom: 20, marginHorizontal: 10 }}>
+            {/* Reduce Button */}
+            {deletable && (
+              <Pressable style={{ backgroundColor: "#fff", width: 30, borderRadius: 5, padding: 5 }} onPress={onRemove}><Entypo name="minus" size={20} color="black" /></Pressable>
+            )}
+            {/* End of Reduce Button*/}
+
+            {/* Quantity */}
+            <Text style={{ fontSize: 18, marginTop: 5 }}>{qty }</Text>
+            {/* End of Quantity */}
+            {/* Add Button */}
+            {addable && (
+              <Pressable style={{ backgroundColor: "#fff", width: 30, borderRadius: 5, padding: 5 }} onPress={onAdd}><Entypo name="plus" size={20} color="black" /></Pressable>
+            )}
+            {/*End of Add Button */}
         </View>
           {/* Cart Button */}
           <Pressable
@@ -182,6 +216,7 @@ export default function ProductDetailsScreen({ navigation, route }) {
     </SafeAreaView>
   )
 }
+export default ProductDetailsScreen;
 const styles = StyleSheet.create({
   // detailsContainer: {
   //   flex: 1,
