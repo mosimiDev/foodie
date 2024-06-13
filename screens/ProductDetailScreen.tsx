@@ -5,7 +5,7 @@ import { Entypo } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
 
 import { useDispatch } from 'react-redux';
-import { addItem } from '../store/cartReducer';
+import { addItem, removeItem } from '../store/cartReducer';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -18,8 +18,8 @@ interface ProductDetProps {
   productName: string;
   productPrice: number;
   qty: number;
-  onRemove: () => void;
-  onAdd: () => void;
+  onRemove: (item: any) => void;
+  onAdd: (item: any) => void;
   addable: boolean;
   deletable: boolean;
   route: any;
@@ -34,12 +34,38 @@ const ProductDetailsScreen: React.FC<ProductDetProps> = ({
   qty,
   onAdd,
   addable,
-  deletable, })=> {
+  deletable, }) => {
+  
+  const [quantity, setQuantity] = useState(0);
 
+  const incrementQuantity = () => {
+    setQuantity(quantity + 1);
+    dispatch(addItem(item))
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+      dispatch(removeItem(item))
+    }
+  };
+
+
+  // const handleItemAdd = (item) => {
+  //   dispatch(addItem(item))
+  // }
+  // const handleItemRemove = (item) => {
+  //   dispatch(removeItem(item))
+  // }
+  
+//   onRemove = {() => onRemove(item)}
+// onAdd = {() => onAdd(item)}
+// deletable = { deletable }
+// addable = { addable }
   const item = route.params;
   const dispatch = useDispatch()
   const navigation = useNavigation();
-
+  
 
   
 // Dropdown Area
@@ -158,32 +184,36 @@ const ProductDetailsScreen: React.FC<ProductDetProps> = ({
 
         {/* Counter */}
           <View style={{ flexDirection: "row", marginTop: 70, justifyContent: "space-between", width: "90%", marginBottom: 20, marginHorizontal: 10 }}>
+
+
             {/* Reduce Button */}
-            {deletable && (
-              <Pressable style={{ backgroundColor: "#fff", width: 30, borderRadius: 5, padding: 5 }} onPress={onRemove}><Entypo name="minus" size={20} color="black" /></Pressable>
-            )}
+            
+              <Pressable style={{ backgroundColor: "#fff", width: 30, borderRadius: 5, padding: 5 }} onPress={decrementQuantity}><Entypo name="minus" size={20} color="black" /></Pressable>
+            
             {/* End of Reduce Button*/}
 
             {/* Quantity */}
-            <Text style={{ fontSize: 18, marginTop: 5 }}>{qty }</Text>
+            <Text style={{ fontSize: 18, marginTop: 5 }}>{quantity}</Text>
             {/* End of Quantity */}
+
+
             {/* Add Button */}
-            {addable && (
-              <Pressable style={{ backgroundColor: "#fff", width: 30, borderRadius: 5, padding: 5 }} onPress={onAdd}><Entypo name="plus" size={20} color="black" /></Pressable>
-            )}
+              <Pressable style={{ backgroundColor: "#fff", width: 30, borderRadius: 5, padding: 5 }} onPress={incrementQuantity}><Entypo name="plus" size={20} color="black" /></Pressable>
             {/*End of Add Button */}
+
         </View>
           {/* Cart Button */}
           <Pressable
-            style={({ pressed }) => [
+            disabled={quantity <= 0}
+            style={() => [
               {
-                backgroundColor: pressed ? '#FF3C00' : '#DB3C25',
+                backgroundColor: quantity <= 0 ? '#FED8B1' : '#DB3C25',
               },
               styles.Cartbtn,
             ]}
             onPress={() => {
               AddToCartAlert();
-              dispatch(addItem(item));
+              
             }}
             // onPress={() => navigation.navigate("Cart")}
           >
@@ -192,6 +222,7 @@ const ProductDetailsScreen: React.FC<ProductDetProps> = ({
 
           {/* Subscribe button */}
           <Pressable
+           
             style={({ pressed }) => [
               {
                 backgroundColor: pressed ? '#FF3C00' : '#DB3C25',
