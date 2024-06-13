@@ -1,8 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import { FlatList, Pressable, Image, SafeAreaView, StyleSheet, Text, View, ActivityIndicator } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import AppButton from '../components/shared/AppButton';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import {  Pressable, Image, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 
@@ -72,6 +69,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  indicator: {},
+
 
 })

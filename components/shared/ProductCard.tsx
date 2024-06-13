@@ -27,10 +27,7 @@ const cartToast=() => {
     setTimeout(() => setShowToast(true), 500); // show toast after 1/2s
     setTimeout(() => setShowToast(false), 3000); // hide toast after 3s
   }
-  const showFavouriteToast=() => {
-    setTimeout(() => setFavouriteToast(true), 500); // show toast after 1/2s
-    setTimeout(() => setFavouriteToast(false), 3000); // hide toast after 3s
-  }
+  
 
   
   return (
@@ -44,21 +41,8 @@ const cartToast=() => {
       ]}>
         {/*  Product Image Section */}
         <View style={styles.sectionImage}>
-          {<Pressable onPress={(pressed) => { pressed ? <Feather name="heart" size={16} color="black" /> : <Feather name="heart" size={16} color="red" />}}>
-          </Pressable>}
-          <Text>
-            <Toast
-              visible={favouriteToast}
-              position={-50}
-              shadow={false}
-              animation={true}
-              hideOnPress={true}
-              backgroundColor='gray'
-            >added to favourites</Toast>
-          </Text>
-          {/* <Pressable style={styles.heartIcon}>
-            <Feather name="heart" size={16} color="black" />
-          </Pressable> */}
+          
+          
           <Image
             style={styles.image}
             source={ProductItems.image}

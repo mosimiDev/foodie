@@ -15,7 +15,6 @@ export default function AccountScreen() {
    {/* User Icon */}
    <View style={{ margin: 30, alignSelf: 'flex-end' }}>
     <Ionicons name="people-circle-outline" size={24} color="black" />
-    {/* <Ionicons name={"ios-person-circle"} size={40} color="black" /> */}
    </View>
    {/*End of User Icon */}
 

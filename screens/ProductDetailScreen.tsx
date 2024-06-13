@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, Pressable,Dimensions, SafeAreaView, ScrollView, StyleSheet, Text, View, Alert } from 'react-native';
+import { Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View, Alert } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
@@ -10,31 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-const windowWidth = Dimensions.get('window').width;
-
-interface ProductDetProps {
-
-  image: any;
-  productName: string;
-  productPrice: number;
-  qty: number;
-  onRemove: (item: any) => void;
-  onAdd: (item: any) => void;
-  addable: boolean;
-  deletable: boolean;
-  route: any;
-}
-
-const ProductDetailsScreen: React.FC<ProductDetProps> = ({ 
-  image,
-  productName,
-  productPrice,
-  route,
-  onRemove,
-  qty,
-  onAdd,
-  addable,
-  deletable, }) => {
+const ProductDetailsScreen = ({ route}) => {
   
   const [quantity, setQuantity] = useState(0);
 
@@ -50,18 +26,6 @@ const ProductDetailsScreen: React.FC<ProductDetProps> = ({
     }
   };
 
-
-  // const handleItemAdd = (item) => {
-  //   dispatch(addItem(item))
-  // }
-  // const handleItemRemove = (item) => {
-  //   dispatch(removeItem(item))
-  // }
-  
-//   onRemove = {() => onRemove(item)}
-// onAdd = {() => onAdd(item)}
-// deletable = { deletable }
-// addable = { addable }
   const item = route.params;
   const dispatch = useDispatch()
   const navigation = useNavigation();

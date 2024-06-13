@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Pressable, GestureResponderEvent, } from 'react-native';
+import { StyleSheet, Text,  Pressable, GestureResponderEvent, } from 'react-native';
 
 type AppBtnProp = {
  text: string;

@@ -1,13 +1,10 @@
 import React, { useState,useCallback} from 'react';
-import { FlatList, Pressable, ScrollView, StyleSheet, Text, View, SafeAreaView, Alert } from 'react-native';
-import NewOrder from '../components/shared/NewOrder';
-import { MaterialIcons } from '@expo/vector-icons';
+import {  Pressable,  StyleSheet, Text, View, SafeAreaView, Alert } from 'react-native';
 import AppButton from '../components/shared/AppButton';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { addItem, removeItem } from '../store/cartReducer';
-import { ProductItems } from '../components/shared/ProductItems';
 import OrderList from '../components/shared/OrderList';
 import ModalConfirmScreen from './ModalConfirmScreen';
 
@@ -38,10 +35,6 @@ export default function CartScreen({ navigation }) {
           }
      }, []);
 
-
-     const handleVisibleModal = () => {
-          setVisible(true);
-     }
 
      const handleClose = () => {
           setVisible(false);

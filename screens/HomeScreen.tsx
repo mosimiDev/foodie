@@ -1,20 +1,14 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View, FlatList } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, TextInput, View, FlatList } from 'react-native';
 import ProductCard from '../components/shared/ProductCard';
 import { ProductItems } from '../components/shared/ProductItems';
-import Menu from './MenuScreen';
-import Cart from './CartScreen';
-import Account from './AccountScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from "@expo/vector-icons";
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Feather } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen() {
   const [userInput, setUserInput] = React.useState("")
 
 

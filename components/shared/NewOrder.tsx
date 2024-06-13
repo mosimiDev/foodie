@@ -1,19 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
-import { Feather } from '@expo/vector-icons';
-import { SimpleLineIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-
-import { useNavigation } from '@react-navigation/native';
-import ProductDetails from '../../screens/ProductDetailScreen';
-import { ProductItems } from './ProductItems';
 
 
 interface NewOrderProps {
- // ProductItems:any
  image: any;
  productName: string;
  productPrice: number;
@@ -25,7 +16,6 @@ interface NewOrderProps {
 }
 
 const NewOrder: React.FC<NewOrderProps> = ({
- // ProductItems,
  image,
  productName,
  productPrice,

@@ -1,13 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
-import HomeScreen from './screens/HomeScreen';
+import React from 'react';
 import MenuScreen from './screens/MenuScreen';
 import CartScreen from './screens/CartScreen';
 import OnBoardScreen from './screens/OnBoardScreen';
 import AccountScreen from './screens/AccountScreen';
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProductDetailsScreen from './screens/ProductDetailScreen';
 import BottomTab from './components/layouts/BottomTab';
@@ -17,11 +13,9 @@ import { StatusBar } from 'expo-status-bar';
 import { Provider } from 'react-redux';
 import { persistor, store } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
-import { useNavigation } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 
-const Tab = createBottomTabNavigator();
 
 export default function App() {
  
@@ -52,17 +46,3 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFB38A",
-    alignItems: "center",
-    paddingTop: 72,
-  },
-
-});
-
-{/* <View style={styles.container}>
-      <StatusBar style="dark" />
-      <Home/>
-    </View> */}

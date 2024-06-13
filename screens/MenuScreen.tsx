@@ -3,12 +3,10 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, SafeAreaView, ScrollView, TextInput, Text, View, FlatList } from 'react-native';
 import ProductCard from '../components/shared/ProductCard';
 import { ProductItems } from '../components/shared/ProductItems';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from './allroutes';
 import { Feather } from '@expo/vector-icons';
 
-type MenuScreenProps = NativeStackScreenProps<RootStackParamList, "MenuScreen">;
-export default function MenuScreen({ navigation }: MenuScreenProps) {
+
+export default function MenuScreen() {
   const [userText, setUserText] = React.useState("")
 
 

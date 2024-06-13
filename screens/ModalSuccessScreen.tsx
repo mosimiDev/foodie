@@ -1,31 +1,18 @@
 import React, { useEffect, useRef } from 'react'
 import { StyleSheet, View, Dimensions, Animated, Easing, Text, Pressable } from 'react-native';
-import AppButton from '../components/shared/AppButton';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { clearCart } from '../store/cartReducer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 
 
 
 export default function ModalSucessScreen({ visible, options, duration, onClose }) {
- const navigation = useNavigation();
  const dispatch = useDispatch()
  
  const pulseAnim = useRef(new Animated.Value(0)).current;
-
- const fadeIn = () => {
-  // Will change fadeAnim value to 1 in 5 seconds
-  Animated.timing(pulseAnim, {
-   toValue: 1,
-   duration: 5000,
-   easing: Easing.inOut(Easing.ease),
-   useNativeDriver: true,
-  }).start();
- };
-
  const { height } = Dimensions.get('screen');
  const startPointY = options?.from === 'top' ? -height : height;
  const transY = useRef(new Animated.Value(startPointY));
@@ -77,12 +64,10 @@ export default function ModalSucessScreen({ visible, options, duration, onClose 
    <Animated.View pointerEvents='none' style={[styles.outerContainer, { opacity: generateBackgroundOpacity() }]} />
    <Animated.View style={[styles.container, { transform: [{ translateY: transY.current }] }]}>
     <View style={styles.innerContainer}>
-     {/* <Button title='Close Modal' onPress={onPress} /> */}
      <Animated.View
       style={[
        styles.fadingContainer,
        {
-        // Bind opacity to animated value
         opacity: pulseAnim,
        },
       ]}>
