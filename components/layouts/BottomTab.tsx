@@ -1,16 +1,14 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
 import HomeScreen from '../../screens/HomeScreen';
 import MenuScreen from '../../screens/MenuScreen';
 import CartScreen from '../../screens/CartScreen';
 import AccountScreen from '../../screens/AccountScreen';
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
-import { addItem } from '../../store/cartReducer';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -25,7 +23,7 @@ export default function BottomTab() {
     tabBarIcon: ({ focused, color, size }) => {
      let iconName;
      if (route.name === "Home") {
-      iconName = focused ? "ios-home-sharp" : "ios-home-outline";
+      iconName = focused ? "home" : "home-outline";
      } else if (route.name === "Menu") {
       iconName = focused ? "grid" : "grid-outline";
      } else if (route.name === "Cart") {
