@@ -1,6 +1,7 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, SafeAreaView, ScrollView, TextInput, Text, View, FlatList } from 'react-native';
+import { StyleSheet,  ScrollView, TextInput, Text, View, FlatList } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import ProductCard from '../components/shared/ProductCard';
 import { ProductItems } from '../components/shared/ProductItems';
 import { Feather } from '@expo/vector-icons';

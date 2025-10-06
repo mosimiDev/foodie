@@ -74,7 +74,6 @@ export default function ModalConfirmScreen({ visible, options, duration, onClose
             <View style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly" }}>
               <Pressable onPress={handleVisibleModal} >
                 <Text style={{ color: "black" }}>Yes</Text>
-
               </Pressable>
               <Pressable onPress={onPress} >
                 <Text style={{ color: "black" }}>No</Text>
@@ -114,11 +113,12 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     width: '70%',
-    height: '50%',
+    height: '70%',
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 20
+    borderRadius: 20,
+    padding: 20,
   },
   closeIcon: {
     alignSelf: 'flex-end'

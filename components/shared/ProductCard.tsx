@@ -70,7 +70,7 @@ const cartToast=() => {
           }}
         >
           <SimpleLineIcons name="bag" size={14} color="white" />
-          <Text style={{ color: 'white' }}>Add to cart</Text>
+          <Text style={{ color: 'white' } }>Add to cart</Text>
           <Text>
             <Toast
               visible={showToast}
@@ -134,14 +134,15 @@ const styles = StyleSheet.create({
     color: '#DB3C25',
   },
   btnCustom: {
-    color: '#DB3C25',
+    color: '#f9f9f9',
     flexDirection: 'row',
     gap: 5,
     borderRadius: 20,
     width: 100,
-    padding: 10,
+    padding: 5,
     alignItems: 'center',
     alignSelf: 'center',
     marginTop: 20,
+    marginHorizontal: 1,
   }
 });

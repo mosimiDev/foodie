@@ -33,11 +33,12 @@
         "projectId": "7bfc3519-0549-4bbd-a893-d01b6676c4f7"
       }
     },
-    "runtimeVersion": {
-      "policy": "nativeVersion"
-    },
+    "runtimeVersion": "exposdk:54.0.10",
     "updates": {
       "url": "https://u.expo.dev/7bfc3519-0549-4bbd-a893-d01b6676c4f7"
-    }
+    },
+    "plugins": [
+      "expo-secure-store"
+    ]
   }
 }

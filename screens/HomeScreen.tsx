@@ -1,6 +1,7 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, TextInput, View, FlatList } from 'react-native';
+import {  StyleSheet, Text, TextInput, View, FlatList } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import ProductCard from '../components/shared/ProductCard';
 import { ProductItems } from '../components/shared/ProductItems';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';

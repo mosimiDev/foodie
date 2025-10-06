@@ -1,5 +1,6 @@
 import React, { useState,useCallback} from 'react';
-import {  Pressable,  StyleSheet, Text, View, SafeAreaView, Alert } from 'react-native';
+import {  Pressable,  StyleSheet, Text, View,  Alert } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import AppButton from '../components/shared/AppButton';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';

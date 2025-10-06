@@ -111,7 +111,8 @@ const styles = StyleSheet.create({
   backgroundColor: 'white',
   justifyContent: 'center',
   alignItems: 'center',
-  borderRadius: 20
+  borderRadius: 20,
+  padding: 20
  },
  fadingContainer: {
   padding: 20,

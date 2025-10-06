@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Image, Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View, Alert } from 'react-native';
+import { Image, Pressable,  ScrollView, StyleSheet, Text, View, Alert } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';

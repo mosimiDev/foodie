@@ -25,9 +25,10 @@ const styles = StyleSheet.create({
   color: '#DB3C25',
   borderRadius: 20,
   width: 100,
-  padding: 10,
+  padding: 2,
   alignItems: 'center',
   alignSelf: 'center',
   marginTop: 20,
+  paddingHorizontal: 1
  }
 })
